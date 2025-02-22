@@ -15,6 +15,7 @@ import { Route as ProjectsImport } from './routes/projects'
 import { Route as EmployeesImport } from './routes/employees'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as EmployeeIdXxxxxxxImport } from './routes/$employeeId/xxxxxxx'
 import { Route as EmployeesEmployeeIdIndexImport } from './routes/employees/$employeeId/index'
 
 // Create/Update Routes
@@ -40,6 +41,12 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const EmployeeIdXxxxxxxRoute = EmployeeIdXxxxxxxImport.update({
+  id: '/$employeeId/xxxxxxx',
+  path: '/$employeeId/xxxxxxx',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsImport
       parentRoute: typeof rootRoute
     }
+    '/$employeeId/xxxxxxx': {
+      id: '/$employeeId/xxxxxxx'
+      path: '/$employeeId/xxxxxxx'
+      fullPath: '/$employeeId/xxxxxxx'
+      preLoaderRoute: typeof EmployeeIdXxxxxxxImport
+      parentRoute: typeof rootRoute
+    }
     '/employees/$employeeId/': {
       id: '/employees/$employeeId/'
       path: '/$employeeId'
@@ -110,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/$employeeId/xxxxxxx': typeof EmployeeIdXxxxxxxRoute
   '/employees/$employeeId': typeof EmployeesEmployeeIdIndexRoute
 }
 
@@ -118,6 +133,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/$employeeId/xxxxxxx': typeof EmployeeIdXxxxxxxRoute
   '/employees/$employeeId': typeof EmployeesEmployeeIdIndexRoute
 }
 
@@ -127,6 +143,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
+  '/$employeeId/xxxxxxx': typeof EmployeeIdXxxxxxxRoute
   '/employees/$employeeId/': typeof EmployeesEmployeeIdIndexRoute
 }
 
@@ -137,15 +154,23 @@ export interface FileRouteTypes {
     | '/about'
     | '/employees'
     | '/projects'
+    | '/$employeeId/xxxxxxx'
     | '/employees/$employeeId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/employees' | '/projects' | '/employees/$employeeId'
+  to:
+    | '/'
+    | '/about'
+    | '/employees'
+    | '/projects'
+    | '/$employeeId/xxxxxxx'
+    | '/employees/$employeeId'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/employees'
     | '/projects'
+    | '/$employeeId/xxxxxxx'
     | '/employees/$employeeId/'
   fileRoutesById: FileRoutesById
 }
@@ -155,6 +180,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   EmployeesRoute: typeof EmployeesRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
+  EmployeeIdXxxxxxxRoute: typeof EmployeeIdXxxxxxxRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -162,6 +188,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   EmployeesRoute: EmployeesRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
+  EmployeeIdXxxxxxxRoute: EmployeeIdXxxxxxxRoute,
 }
 
 export const routeTree = rootRoute
@@ -177,7 +204,8 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/employees",
-        "/projects"
+        "/projects",
+        "/$employeeId/xxxxxxx"
       ]
     },
     "/": {
@@ -194,6 +222,9 @@ export const routeTree = rootRoute
     },
     "/projects": {
       "filePath": "projects.tsx"
+    },
+    "/$employeeId/xxxxxxx": {
+      "filePath": "$employeeId/xxxxxxx.tsx"
     },
     "/employees/$employeeId/": {
       "filePath": "employees/$employeeId/index.tsx",
