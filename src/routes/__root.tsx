@@ -34,6 +34,14 @@ function RootComponent() {
           }}
         >
           Employees
+        </Link>{' '}
+        <Link
+          to="/projects"
+          activeProps={{
+            className: 'font-bold',
+          }}
+        >
+          Projects
         </Link>
       </div>
       <hr />
