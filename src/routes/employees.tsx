@@ -5,6 +5,7 @@ export const Route = createFileRoute('/employees')({
   component: EmployeesComponent,
   loader: () => getEmployees(),
   // preload: false
+  staleTime: 10_000
 })
 
 function EmployeesComponent() {
