@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
 import { getEmployees } from '../api/employee.api';
 
 export const Route = createFileRoute('/employees')({
@@ -14,10 +14,14 @@ function EmployeesComponent() {
   return (
     <div className="p-2">
       <h1 className='text-2xl'>Employees</h1>
+      <Outlet />
       <ul>
         {employees.map(employee => (
           <li key={employee.id}>
-            {employee.name}
+            <Link
+              to={`/employees/$employeeId`}
+              params={{ employeeId: String(employee.id) }}
+            >{employee.name}</Link>
           </li>
         ))}
       </ul>
