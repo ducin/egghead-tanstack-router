@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { getEmployeeById } from '../../api/employee.api'
+import { getEmployeeById } from '../../../api/employee.api'
 
-export const Route = createFileRoute('/employees/$employeeId')({
+export const Route = createFileRoute('/employees/$employeeId/')({
   component: RouteComponent,
   loader: ({ params: { employeeId } }) => {
     const id = Number(employeeId)

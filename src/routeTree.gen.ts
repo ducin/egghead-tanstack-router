@@ -15,7 +15,7 @@ import { Route as ProjectsImport } from './routes/projects'
 import { Route as EmployeesImport } from './routes/employees'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
-import { Route as EmployeesEmployeeIdImport } from './routes/employees/$employeeId'
+import { Route as EmployeesEmployeeIdIndexImport } from './routes/employees/$employeeId/index'
 
 // Create/Update Routes
 
@@ -43,9 +43,9 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const EmployeesEmployeeIdRoute = EmployeesEmployeeIdImport.update({
-  id: '/$employeeId',
-  path: '/$employeeId',
+const EmployeesEmployeeIdIndexRoute = EmployeesEmployeeIdIndexImport.update({
+  id: '/$employeeId/',
+  path: '/$employeeId/',
   getParentRoute: () => EmployeesRoute,
 } as any)
 
@@ -81,11 +81,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsImport
       parentRoute: typeof rootRoute
     }
-    '/employees/$employeeId': {
-      id: '/employees/$employeeId'
+    '/employees/$employeeId/': {
+      id: '/employees/$employeeId/'
       path: '/$employeeId'
       fullPath: '/employees/$employeeId'
-      preLoaderRoute: typeof EmployeesEmployeeIdImport
+      preLoaderRoute: typeof EmployeesEmployeeIdIndexImport
       parentRoute: typeof EmployeesImport
     }
   }
@@ -94,11 +94,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface EmployeesRouteChildren {
-  EmployeesEmployeeIdRoute: typeof EmployeesEmployeeIdRoute
+  EmployeesEmployeeIdIndexRoute: typeof EmployeesEmployeeIdIndexRoute
 }
 
 const EmployeesRouteChildren: EmployeesRouteChildren = {
-  EmployeesEmployeeIdRoute: EmployeesEmployeeIdRoute,
+  EmployeesEmployeeIdIndexRoute: EmployeesEmployeeIdIndexRoute,
 }
 
 const EmployeesRouteWithChildren = EmployeesRoute._addFileChildren(
@@ -110,7 +110,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
-  '/employees/$employeeId': typeof EmployeesEmployeeIdRoute
+  '/employees/$employeeId': typeof EmployeesEmployeeIdIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -118,7 +118,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
-  '/employees/$employeeId': typeof EmployeesEmployeeIdRoute
+  '/employees/$employeeId': typeof EmployeesEmployeeIdIndexRoute
 }
 
 export interface FileRoutesById {
@@ -127,7 +127,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/employees': typeof EmployeesRouteWithChildren
   '/projects': typeof ProjectsRoute
-  '/employees/$employeeId': typeof EmployeesEmployeeIdRoute
+  '/employees/$employeeId/': typeof EmployeesEmployeeIdIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -146,7 +146,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/employees'
     | '/projects'
-    | '/employees/$employeeId'
+    | '/employees/$employeeId/'
   fileRoutesById: FileRoutesById
 }
 
@@ -189,14 +189,14 @@ export const routeTree = rootRoute
     "/employees": {
       "filePath": "employees.tsx",
       "children": [
-        "/employees/$employeeId"
+        "/employees/$employeeId/"
       ]
     },
     "/projects": {
       "filePath": "projects.tsx"
     },
-    "/employees/$employeeId": {
-      "filePath": "employees/$employeeId.tsx",
+    "/employees/$employeeId/": {
+      "filePath": "employees/$employeeId/index.tsx",
       "parent": "/employees"
     }
   }
