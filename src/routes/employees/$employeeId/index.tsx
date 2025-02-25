@@ -13,7 +13,16 @@ export const Route = createFileRoute('/employees/$employeeId/')({
   },
   notFoundComponent: () => {
     return <p>This employee doesnt exist</p>
-  }
+  },
+  onEnter(match) {
+    console.log('ENTER', {match})
+  },
+  onStay(match) {
+    console.log('STAY', {match})
+  },
+  onLeave(match) {
+    console.log('LEAVE', {match})
+  },
 })
 
 function RouteComponent() {
