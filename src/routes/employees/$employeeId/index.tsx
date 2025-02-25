@@ -1,5 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useParams } from '@tanstack/react-router'
 import { getEmployeeById } from '../../../api/employee.api'
+import { EmployeeDetails } from '../../../components/EmployeeDetails'
 
 export const Route = createFileRoute('/employees/$employeeId/')({
   component: RouteComponent,
@@ -11,21 +12,6 @@ export const Route = createFileRoute('/employees/$employeeId/')({
 
 function RouteComponent() {
   const employeeDetails = Route.useLoaderData()
-  return (
-    <div className="p-2">
-      <h2 className='text-xl'>Employee Details</h2>
-      <p>
-        <strong>ID:</strong> {employeeDetails.id}
-      </p>
-      <p>
-        <strong>Name:</strong> {employeeDetails.name}
-      </p>
-      <p>
-        <strong>Position:</strong> {employeeDetails.position}
-      </p>
-      <p>
-        <strong>Skills:</strong> {employeeDetails.skills.join(', ')}
-      </p>
-    </div>
-  )
+//   const { employeeId } = Route.useParams()
+  return <EmployeeDetails employee={employeeDetails} />
 }
