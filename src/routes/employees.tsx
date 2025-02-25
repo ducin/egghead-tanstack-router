@@ -5,7 +5,10 @@ export const Route = createFileRoute('/employees')({
   component: EmployeesComponent,
   loader: () => getEmployees(),
   // preload: false
-  staleTime: 10_000
+  staleTime: 10_000,
+  // notFoundComponent: () => {
+  //   return <p>This employee doesnt exist</p>
+  // }
 })
 
 function EmployeesComponent() {
@@ -16,6 +19,12 @@ function EmployeesComponent() {
       <h1 className='text-2xl'>Employees</h1>
       <Outlet />
       <ul>
+          <li key={123}>
+            <Link
+              to={`/employees/$employeeId`}
+              params={{ employeeId: '123' }}
+            >i dont exist at all</Link>
+          </li>
         {employees.map(employee => (
           <li key={employee.id}>
             <Link

@@ -7,6 +7,9 @@ import { routeTree } from './routeTree.gen'
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
+  defaultNotFoundComponent(){
+    return <p>This page doesnt exist</p>
+  }
 })
 
 // Register things for typesafety
